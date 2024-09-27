@@ -15,7 +15,7 @@ public class PetController {
     @Autowired
     private PetRepository petRepository;
 
-    //TODO Lista de pets
+    //Lista de pets
     @GetMapping()
     public ModelAndView listPets() {
         ModelAndView mv = new ModelAndView("lista_pets");
