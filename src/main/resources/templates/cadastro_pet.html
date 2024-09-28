@@ -7,34 +7,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Lista de Pets</title>
+    <title>Cadastrar Pet</title>
 </head>
 <body>
+<div class="container mt-5">
+    <div class="row">
+        <h1>Cadastro de Pet</h1>
+    </div>
 
-<div class="container">
     <div class="row">
-        <h1>Lista de Pets</h1>
-    </div>
-    
-    <div class="row">
-        <div class="col-12">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="pet : ${pets}">
-                    <td class="col-3" th:text="${pet.nome}">Nome</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    
-    <div class="row">
-        <a href="/cadastro_pet">Novo Item</a>
+        <form action="/inserir_pet" method="post" th:object="${pet}">
+
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input class="form-control" type="text" id="nome" th:field="*{nome}">
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+
+        </form>
     </div>
 
 </div>

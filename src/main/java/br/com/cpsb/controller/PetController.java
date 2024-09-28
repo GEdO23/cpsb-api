@@ -5,6 +5,7 @@ import br.com.cpsb.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,7 +27,26 @@ public class PetController {
         return mv;
     }
 
-    //TODO Cadastro de pet
+    //Cadastro de pet
+    @PostMapping("/inserir_pet")
+    public ModelAndView registerPet(Pet new_pet) {
+        ModelAndView mv = new ModelAndView("cadastro_pet");
+        
+        petRepository.save(new_pet);
+        
+        mv.addObject("pet", new_pet);
+        
+        return mv;
+    }
+    
+    @GetMapping("/cadastro_pet")
+    public ModelAndView registerPet() {
+        ModelAndView mv = new ModelAndView("cadastro_pet");
+        
+        mv.addObject("pet", new Pet());
+        
+        return mv;
+    }
 
     //TODO Edição de pet
 
