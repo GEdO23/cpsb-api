@@ -18,7 +18,7 @@ public class PetController {
 
     //Lista de pets
     @GetMapping()
-    public ModelAndView listPets() {
+    public ModelAndView listaPets() {
         ModelAndView mv = new ModelAndView("lista_pets");
         
         List<Pet> pets = petRepository.findAll();
@@ -28,9 +28,9 @@ public class PetController {
     }
 
     //Cadastro de pet
-    @PostMapping("/inserir_pet")
-    public ModelAndView registerPet(Pet new_pet) {
-        ModelAndView mv = new ModelAndView("cadastro_pet");
+    @PostMapping("/cadastrar_pet")
+    public ModelAndView cadastrarPet(Pet new_pet) {
+        ModelAndView mv = new ModelAndView("redirect:/");
         
         petRepository.save(new_pet);
         
@@ -39,9 +39,9 @@ public class PetController {
         return mv;
     }
     
-    @GetMapping("/cadastro_pet")
-    public ModelAndView registerPet() {
-        ModelAndView mv = new ModelAndView("cadastro_pet");
+    @GetMapping("/formulario_cadastrar_pet")
+    public ModelAndView formularioCadastrarPet() {
+        ModelAndView mv = new ModelAndView("formulario_cadastrar_pet");
         
         mv.addObject("pet", new Pet());
         

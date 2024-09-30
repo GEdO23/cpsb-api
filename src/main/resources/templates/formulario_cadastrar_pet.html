@@ -16,14 +16,14 @@
     </div>
 
     <div class="row">
-        <form action="/inserir_pet" method="post" th:object="${pet}">
+        <form action="/cadastrar_pet" method="post" th:object="${pet}">
 
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input class="form-control" type="text" id="nome" th:field="*{nome}">
             </div>
 
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary mt-4" type="submit">Submit</button>
 
         </form>
     </div>
