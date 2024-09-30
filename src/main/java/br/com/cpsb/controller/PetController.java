@@ -4,11 +4,14 @@ import br.com.cpsb.model.Pet;
 import br.com.cpsb.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PetController {
@@ -48,7 +51,43 @@ public class PetController {
         return mv;
     }
 
-    //TODO Edição de pet
+    //Edição de pet
+    @PostMapping("/atualizar_pet/{id}")
+    public ModelAndView atualizarPet(@PathVariable Long id, Pet newPet, BindingResult bd) {
+
+        if (bd.hasErrors()) {
+            ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
+            mv.addObject("pet", newPet);
+            return mv;
+        }
+
+        Optional<Pet> op = petRepository.findById(id);
+
+        if (op.isPresent()) {
+            Pet pet = op.get();
+            pet.setNome(newPet.getNome());
+            petRepository.save(pet);
+        }
+
+        return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/formulario_atualizar_pet/{id}")
+    public ModelAndView formularioAtualizarPet(@PathVariable Long id) {
+
+        Optional<Pet> op = petRepository.findById(id);
+
+        if (op.isPresent()) {
+            Pet pet = op.get();
+
+            ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
+            mv.addObject("pet", pet);
+
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/");
+        }
+    }
 
     //TODO Detalhes de pet
     
