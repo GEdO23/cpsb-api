@@ -1,6 +1,7 @@
 # Cutcute Petshop Spring Boot API
 
-[//]: #TODO (Add a description of the project)
+[//]: #TODO (Adcionar uma descrição ao projeto)
+[//]: #TODO (Adcionar a logo do Cutcute Petshop)
 
 ## Pré-requisitos
 Para executar o projeto é necessário ter instalado:

@@ -7,13 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Detalhes de pet</title>
+    <title>Detalhes da raça</title>
 </head>
 <body>
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Detalhes de <span th:text="${pet.nome}"></span></h1>
+        <h1>Detalhes de <span th:text="${raca.nome}"></span></h1>
     </div>
 
     <div class="row">
@@ -22,21 +22,14 @@
             <tr>
 
                 <td class="col-2">Nome</td>
-                <td><span th:text="${pet.nome}"></span></td>
+                <td><span th:text="${raca.nome}"></span></td>
 
             </tr>
 
             <tr>
 
-                <td class="col-2">Raça</td>
-                <td><span th:text="${pet.raca.nome}"></span></td>
-
-            </tr>
-
-            <tr>
-
-                <td class="col-2">Descrição da raça</td>
-                <td><span th:text="${pet.raca.descricao}"></span></td>
+                <td class="col-2">Descrição</td>
+                <td><span th:text="${raca.descricao}"></span></td>
 
             </tr>
 
@@ -45,17 +38,7 @@
 
     <div class="row gap-2">
         <div class="col-auto">
-            <a href="/lista_pets">Voltar para a lista de pets</a>
-        </div>
-        <div class="col-auto">
-            <a th:href="@{/formulario_atualizar_pet/{petId}(petId = ${pet.id})}">
-                Editar informações de pet
-            </a>
-        </div>
-        <div class="col-auto">
-            <a th:href="@{/remover_pet/{petId}(petId = ${pet.id})}">
-                Remover pet
-            </a>
+            <a href="/lista_racas">Voltar para a lista de raças</a>
         </div>
     </div>
 </div>

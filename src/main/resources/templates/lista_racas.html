@@ -7,13 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Lista de Pets</title>
+    <title>Lista de Raças</title>
 </head>
 <body>
 
 <div class="container">
     <div class="row mt-5">
-        <h1>Lista de Pets</h1>
+        <h1>Lista de Raças</h1>
     </div>
 
     <div class="row">
@@ -22,24 +22,14 @@
                 <thead>
                 <tr>
                     <th scope="col">Nome</th>
-                    <th scope="col">Raça</th>
-                    <th scope="col">#</th>
-                    <th scope="col">#</th>
                     <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="pet : ${pets}">
-                    <td class="col-3" th:text="${pet.nome}">Nome</td>
-                    <td class="col-3" th:text="${pet.raca.nome}">Raça</td>
+                <tr th:each="raca : ${racas}">
+                    <td class="col-3" th:text="${raca.nome}">Nome</td>
                     <td class="col-1">
-                        <a th:href="@{/detalhes_pet/{idPet}(idPet = ${pet.id})}">Detalhes</a>
-                    </td>
-                    <td class="col-1">
-                        <a th:href="@{/formulario_atualizar_pet/{idPet}(idPet = ${pet.id})}">Atualizar</a>
-                    </td>
-                    <td class="col-1">
-                        <a th:href="@{/remover_pet/{idPet}(idPet = ${pet.id})}">Remover</a>
+                        <a th:href="@{/detalhes_raca/{idRaca}(idRaca = ${raca.id})}">Detalhes</a>
                     </td>
                 </tr>
                 </tbody>
@@ -48,7 +38,7 @@
     </div>
 
     <div class="row">
-        <a href="/formulario_cadastrar_pet">Cadastrar pet</a>
+        <a href="/formulario_cadastrar_raca">Cadastrar raça</a>
     </div>
 
 </div>
