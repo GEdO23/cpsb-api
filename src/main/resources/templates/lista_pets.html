@@ -24,6 +24,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">#</th>
                     <th scope="col">#</th>
+                    <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,9 @@
                     </td>
                     <td class="col-1">
                         <a th:href="@{/formulario_atualizar_pet/{idPet}(idPet = ${pet.id})}">Atualizar</a>
+                    </td>
+                    <td class="col-1">
+                        <a th:href="@{/remover_pet/{idPet}(idPet = ${pet.id})}">Remover</a>
                     </td>
                 </tr>
                 </tbody>
