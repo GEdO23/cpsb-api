@@ -23,12 +23,16 @@
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">#</th>
+                    <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="pet : ${pets}">
                     <td class="col-3" th:text="${pet.nome}">Nome</td>
-                    <td class="col-3">
+                    <td class="col-1">
+                        <a th:href="@{/detalhes_pet/{idPet}(idPet = ${pet.id})}">Detalhes</a>
+                    </td>
+                    <td class="col-1">
                         <a th:href="@{/formulario_atualizar_pet/{idPet}(idPet = ${pet.id})}">Atualizar</a>
                     </td>
                 </tr>

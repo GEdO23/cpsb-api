@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 public class PetController {
-    
+
     @Autowired
     private PetRepository petRepository;
 
@@ -23,10 +23,10 @@ public class PetController {
     @GetMapping()
     public ModelAndView listaPets() {
         ModelAndView mv = new ModelAndView("lista_pets");
-        
+
         List<Pet> pets = petRepository.findAll();
         mv.addObject("pets", pets);
-        
+
         return mv;
     }
 
@@ -34,20 +34,20 @@ public class PetController {
     @PostMapping("/cadastrar_pet")
     public ModelAndView cadastrarPet(Pet new_pet) {
         ModelAndView mv = new ModelAndView("redirect:/");
-        
+
         petRepository.save(new_pet);
-        
+
         mv.addObject("pet", new_pet);
-        
+
         return mv;
     }
-    
+
     @GetMapping("/formulario_cadastrar_pet")
     public ModelAndView formularioCadastrarPet() {
         ModelAndView mv = new ModelAndView("formulario_cadastrar_pet");
-        
+
         mv.addObject("pet", new Pet());
-        
+
         return mv;
     }
 
@@ -89,6 +89,24 @@ public class PetController {
         }
     }
 
-    //TODO Detalhes de pet
-    
+    //Detalhes de pet
+    @GetMapping("/detalhes_pet/{id}")
+    public ModelAndView detalhesPet(@PathVariable Long id) {
+        Optional<Pet> op = petRepository.findById(id);
+
+        if (op.isPresent()) {
+            Pet pet = op.get();
+
+            ModelAndView mv = new ModelAndView("detalhes_pet");
+            mv.addObject("pet", pet);
+
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/");
+        }
+    }
+
+
+    //TODO Remover pet
+
 }
