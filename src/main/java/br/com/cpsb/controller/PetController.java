@@ -108,5 +108,15 @@ public class PetController {
 
 
     //TODO Remover pet
+    @GetMapping("/remover_pet/{id}")
+    public String removerPet(@PathVariable Long id) {
+        Optional<Pet> op = petRepository.findById(id);
+
+        if (op.isPresent()) {
+            petRepository.deleteById(id);
+        }
+        
+        return "redirect:/";
+    }
 
 }
