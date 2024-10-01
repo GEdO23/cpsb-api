@@ -8,3 +8,5 @@ INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Brendan', 1);
 INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Rex', 4);
 INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Toby', 3);
 INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Spike', 2);
+
+INSERT INTO TB_CPSB_USUARIO (nm_usuario) VALUES ( 'Gabriel' )
