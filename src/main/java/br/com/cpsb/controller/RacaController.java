@@ -2,11 +2,9 @@ package br.com.cpsb.controller;
 
 import br.com.cpsb.model.Pet;
 import br.com.cpsb.model.Raca;
-import br.com.cpsb.repository.PetRepository;
 import br.com.cpsb.repository.RacaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 public class RacaController {
-    
+
     @Autowired
     private RacaRepository racaRepository;
 
@@ -51,4 +49,19 @@ public class RacaController {
         return mv;
     }
 
+    @GetMapping("/detalhes_raca/{id}")
+    public ModelAndView detalhesPet(@PathVariable Long id) {
+        Optional<Raca> racaOptional = racaRepository.findById(id);
+
+        if (racaOptional.isPresent()) {
+            Raca raca = racaOptional.get();
+
+            ModelAndView mv = new ModelAndView("detalhes_raca");
+            mv.addObject("raca", raca);
+
+            return mv;
+        } else {
+            return new ModelAndView("redirect:/lista_racas");
+        }
+    }
 }

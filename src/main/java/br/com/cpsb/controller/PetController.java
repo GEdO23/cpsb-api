@@ -49,6 +49,7 @@ public class PetController {
         } else {
             Raca raca = new Raca();
             raca.setNome(newPet.getRaca().getNome());
+            raca.setDescricao("Descrição da raça " + newPet.getRaca().getNome());
             racaRepository.save(raca);
             newPet.setRaca(raca);
         }
@@ -98,6 +99,7 @@ public class PetController {
             } else {
                 Raca raca = new Raca();
                 raca.setNome(newPet.getRaca().getNome());
+                raca.setDescricao("Descrição da raça " + newPet.getRaca().getNome());
                 racaRepository.save(raca);
                 pet.setRaca(raca);
             }

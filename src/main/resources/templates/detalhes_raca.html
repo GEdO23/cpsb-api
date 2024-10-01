@@ -7,32 +7,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Cadastrar Raça</title>
+    <title>Detalhes da raça</title>
 </head>
 <body>
+
 <div class="container mt-5">
     <div class="row">
-        <h1>Cadastro de Raça</h1>
+        <h1>Detalhes de <span th:text="${raca.nome}"></span></h1>
     </div>
 
     <div class="row">
-        <form action="/cadastrar_raca" method="post" th:object="${raca}">
+        <table class="table table-hover">
 
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input class="form-control" type="text" id="nome" th:field="*{nome}">
-            </div>
+            <tr>
 
-            <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <input class="form-control" type="text" id="descricao" th:field="*{descricao}">
-            </div>
+                <td class="col-2">Nome</td>
+                <td><span th:text="${raca.nome}"></span></td>
 
-            <button class="btn btn-primary mt-4" type="submit">Submit</button>
+            </tr>
 
-        </form>
+            <tr>
+
+                <td class="col-2">Descrição</td>
+                <td><span th:text="${raca.descricao}"></span></td>
+
+            </tr>
+
+        </table>
     </div>
 
+    <div class="row gap-2">
+        <div class="col-auto">
+            <a href="/lista_racas">Voltar para a lista de raças</a>
+        </div>
+    </div>
 </div>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

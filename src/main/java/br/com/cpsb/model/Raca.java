@@ -21,5 +21,8 @@ public class Raca {
     
     @Column(name = "nm_raca")
     public String nome;
+
+    @Column(name = "ds_raca", length = 1000)
+    public String descricao;
     
 }

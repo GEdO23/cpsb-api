@@ -22,11 +22,15 @@
                 <thead>
                 <tr>
                     <th scope="col">Nome</th>
+                    <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="raca : ${racas}">
                     <td class="col-3" th:text="${raca.nome}">Nome</td>
+                    <td class="col-1">
+                        <a th:href="@{/detalhes_raca/{idRaca}(idRaca = ${raca.id})}">Detalhes</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
