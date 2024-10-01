@@ -24,6 +24,18 @@
                 <input class="form-control" type="text" id="nome" th:field="*{nome}">
             </div>
 
+            <div class="form-group">
+                <label for="raca">Raça</label>
+                <select class="form-select" id="raca" th:field="*{raca.nome}">
+                    <option th:each="r : ${lista_racas}"
+                            th:value="${r}"
+                            th:text="${r}">
+                </select>
+                <small id="racaHelp" class="form-text text-muted">
+                    <a href="/formulario_cadastrar_raca">Cadastrar nova raça</a>
+                </small>
+            </div>
+
             <button class="btn btn-primary mt-4" type="submit">Submit</button>
 
         </form>

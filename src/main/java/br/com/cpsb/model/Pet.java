@@ -22,6 +22,10 @@ public class Pet {
     @Column(name = "nm_pet")
     private String nome;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_raca")
+    private Raca raca;
+
     //TODO: Adicionar o restante dos atributos:
     // - raca (Raca CLASS)
     // - especie (Especie CLASS)

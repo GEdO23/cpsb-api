@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +20,9 @@ public class PetController {
 
     @Autowired
     private PetRepository petRepository;
+
+    @Autowired
+    private RacaRepository racaRepository;
 
     //Lista de pets
     @GetMapping("/lista_pets")
@@ -35,12 +37,24 @@ public class PetController {
 
     //Cadastro de pet
     @PostMapping("/cadastrar_pet")
-    public ModelAndView cadastrarPet(Pet new_pet) {
+    public ModelAndView cadastrarPet(Pet newPet) {
         ModelAndView mv = new ModelAndView("redirect:/lista_pets");
+        
+        Optional<Raca> racaOptional = racaRepository.findAll().stream().filter(raca ->
+                raca.getNome().equals(newPet.getRaca().getNome())
+        ).findFirst();
+        
+        if (racaOptional.isPresent()) {
+            newPet.setRaca(racaOptional.get());
+        } else {
+            Raca raca = new Raca();
+            raca.setNome(newPet.getRaca().getNome());
+            racaRepository.save(raca);
+            newPet.setRaca(raca);
+        }
 
-        petRepository.save(new_pet);
-
-        mv.addObject("pet", new_pet);
+        petRepository.save(newPet);
+        mv.addObject("pet", newPet);
 
         return mv;
     }
@@ -49,6 +63,10 @@ public class PetController {
     public ModelAndView formularioCadastrarPet() {
         ModelAndView mv = new ModelAndView("formulario_cadastrar_pet");
         mv.addObject("pet", new Pet());
+
+        List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
+        mv.addObject("lista_racas", racas);
+
         return mv;
     }
 
@@ -58,6 +76,10 @@ public class PetController {
         if (bd.hasErrors()) {
             ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
             mv.addObject("pet", newPet);
+
+            List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
+            mv.addObject("lista_racas", racas);
+
             return mv;
         }
 
@@ -66,6 +88,20 @@ public class PetController {
         if (petOptional.isPresent()) {
             Pet pet = petOptional.get();
             pet.setNome(newPet.getNome());
+
+            Optional<Raca> racaOptional = racaRepository.findAll().stream().filter(raca ->
+                    raca.getNome().equals(newPet.getRaca().getNome())
+            ).findFirst();
+
+            if (racaOptional.isPresent()) {
+                pet.setRaca(racaOptional.get());
+            } else {
+                Raca raca = new Raca();
+                raca.setNome(newPet.getRaca().getNome());
+                racaRepository.save(raca);
+                pet.setRaca(raca);
+            }
+
             petRepository.save(pet);
         }
 
@@ -80,6 +116,10 @@ public class PetController {
             Pet pet = petOptional.get();
             ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
             mv.addObject("pet", pet);
+
+            List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
+            mv.addObject("lista_racas", racas);
+
             return mv;
         } else {
             return new ModelAndView("redirect:/lista_pets");

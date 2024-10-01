@@ -7,32 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Cadastrar Pet</title>
+    <title>Cadastrar Raça</title>
 </head>
 <body>
 <div class="container mt-5">
     <div class="row">
-        <h1>Cadastro de Pet</h1>
+        <h1>Cadastro de Raça</h1>
     </div>
 
     <div class="row">
-        <form action="/cadastrar_pet" method="post" th:object="${pet}">
+        <form action="/cadastrar_raca" method="post" th:object="${raca}">
 
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input class="form-control" type="text" id="nome" th:field="*{nome}">
-            </div>
-
-            <div class="form-group">
-                <label for="raca">Raça</label>
-                <select class="form-select" id="raca" th:field="*{raca.nome}">
-                    <option th:each="r : ${lista_racas}"
-                            th:value="${r}"
-                            th:text="${r}">
-                </select>
-                <small id="racaHelp" class="form-text text-muted">
-                    <a href="/formulario_cadastrar_raca">Cadastrar nova raça</a>
-                </small>
             </div>
 
             <button class="btn btn-primary mt-4" type="submit">Submit</button>
