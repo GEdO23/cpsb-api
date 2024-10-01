@@ -1,6 +1,5 @@
 package br.com.cpsb.controller;
 
-import br.com.cpsb.model.Pet;
 import br.com.cpsb.model.Raca;
 import br.com.cpsb.repository.RacaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,7 @@ public class RacaController {
     }
 
     @GetMapping("/detalhes_raca/{id}")
-    public ModelAndView detalhesPet(@PathVariable Long id) {
+    public ModelAndView detalhesRaca(@PathVariable Long id) {
         Optional<Raca> racaOptional = racaRepository.findById(id);
 
         if (racaOptional.isPresent()) {
