@@ -2,6 +2,9 @@
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragmentos :: cabecalho('Cadastrar Raça')}"></head>
 <body>
+
+<div th:replace="~{fragmentos :: navbar}"></div>
+
 <div class="container mt-5">
     <div class="row">
         <h1>Cadastro de Raça</h1>
@@ -12,12 +15,20 @@
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input class="form-control" type="text" id="nome" th:field="*{nome}">
+                <input class="form-control"
+                       type="text"
+                       id="nome"
+                       name="nome"
+                       th:field="*{nome}">
             </div>
 
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input class="form-control" type="text" id="descricao" th:field="*{descricao}">
+                <input class="form-control"
+                       type="text"
+                       id="descricao"
+                       name="descricao"
+                       th:field="*{descricao}">
             </div>
 
             <button class="btn btn-primary mt-4" type="submit">Submit</button>

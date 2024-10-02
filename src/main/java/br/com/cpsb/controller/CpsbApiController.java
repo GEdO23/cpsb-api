@@ -2,13 +2,17 @@ package br.com.cpsb.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CpsbApiController {
     
     @GetMapping()
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    public String index() {
+        return "index";
+    }
+    
+    @GetMapping("/acesso_negado")
+    public String acessoNegado() {
+        return "erro_403";
     }
 }
