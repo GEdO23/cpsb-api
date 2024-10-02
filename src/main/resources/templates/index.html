@@ -3,19 +3,18 @@
 <head th:replace="~{fragmentos :: cabecalho('Home')}"></head>
 <body>
 
-<div class="container">
-    <div class="row mt-5">
-        <h1>Home</h1>
-    </div>
-
-    <div class="row">
-        <div class="col-auto">
-            <a href="/lista_racas">Lista de Raças</a>
-        </div>
-
-        <div class="col-auto">
-            <a href="/lista_pets">Lista de Pets</a>
-        </div>
+<div class="jumbotron jumbotron-fluid mt-5">
+    <div class="container">
+        <h1 class="display-4">CPSB-API</h1>
+        <p class="lead">Seja muito bem vindo ao Cutcute Petshop Spring Boot API!</p>
+        <hr class="my-4">
+        <p>Caso necessite de ajuda, entrar em contato com 
+            <a href="mailto:gabriel.eringer.23@gmail.com">Gabriel Eringer de Oliveira</a>!
+        </p>
+        <p class="lead">
+            <a class="btn btn-lg btn-primary" href="/lista_pets">Lista de Pets</a>
+            <a class="btn btn-lg btn-secondary" href="/lista_racas">Lista de Raças</a>
+        </p>
     </div>
 </div>
 
