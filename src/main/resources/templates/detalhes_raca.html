@@ -3,6 +3,8 @@
 <head th:replace="~{fragmentos :: cabecalho('Detalhes de Raça')}"></head>
 <body>
 
+<div th:replace="~{fragmentos :: navbar}"></div>
+
 <div class="container mt-5">
     <div class="row">
         <h1>Detalhes de <span th:text="${raca.nome}"></span></h1>

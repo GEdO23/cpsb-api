@@ -9,4 +9,13 @@ INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Rex', 4);
 INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Toby', 3);
 INSERT INTO TB_CPSB_PET (nm_pet, id_raca) VALUES ('Spike', 2);
 
-INSERT INTO TB_CPSB_USUARIO (nm_usuario) VALUES ( 'Gabriel' )
+INSERT INTO TB_CPSB_ROLE (nm_role) VALUES ( 'ROLE_ADMIN' );
+INSERT INTO TB_CPSB_ROLE (nm_role) VALUES ( 'ROLE_USER' );
+
+INSERT INTO TB_CPSB_USUARIO (nm_username, ds_password) VALUES ( 'Gabriel', '$2y$08$OzTn1weNsLrAe2HGsvmt.uOYduu0Yi2yZ6ZlaHJxK.s/.nD2.Uoda' ); // 12345
+INSERT INTO TB_CPSB_USUARIO (nm_username, ds_password) VALUES ( 'Michelle', '$2y$08$OzTn1weNsLrAe2HGsvmt.uOYduu0Yi2yZ6ZlaHJxK.s/.nD2.Uoda' ); // 12345
+INSERT INTO TB_CPSB_USUARIO (nm_username, ds_password) VALUES ( 'João Pedro', '$2y$08$OzTn1weNsLrAe2HGsvmt.uOYduu0Yi2yZ6ZlaHJxK.s/.nD2.Uoda' ); // 12345
+
+INSERT INTO TB_CPSB_USUARIO_ROLE (id_usuario, id_role) VALUES ( 1, 1 );
+INSERT INTO TB_CPSB_USUARIO_ROLE (id_usuario, id_role) VALUES ( 2, 1 );
+INSERT INTO TB_CPSB_USUARIO_ROLE (id_usuario, id_role) VALUES ( 3, 2 );

@@ -1,17 +1,18 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="~{fragmentos :: cabecalho('Home')}"></head>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecalho('Acesso negado')}"></head>
+<body>
 <body>
 
 <div th:replace="~{fragmentos :: navbar}"></div>
 
 <div class="jumbotron jumbotron-fluid mt-5">
     <div class="container">
-        <h1 class="display-6">CPSB-API</h1>
-        <p class="lead">Seja muito bem vindo ao Cutcute Petshop Spring Boot API!</p>
+        <h1 class="display-6">Erro 403!</h1>
+        <p>Parece que você não tem permissão para acessar este conteúdo.</p>
         <hr class="my-4">
-        <p>Caso necessite de ajuda, entrar em contato com 
-            <a href="mailto:gabriel.eringer.23@gmail.com">Gabriel Eringer de Oliveira</a>!
+        <p>
+            <a class="btn btn-primary" href="/">Voltar para página principal</a>
         </p>
     </div>
 </div>

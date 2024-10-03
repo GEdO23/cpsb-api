@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CpsbApiApplication {
 
-    //TODO: Criar controller de Usuário
-    //TODO: Cadastro e Login de Usuário
     //TODO: CRUD de Usuário
     //TODO: Testes com Selenium e Cucumber
     //TODO: Internacionalização (pt-br, en)

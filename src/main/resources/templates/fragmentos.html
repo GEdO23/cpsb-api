@@ -9,7 +9,36 @@
             rel="stylesheet"
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous">
-    
+
     <title th:text="${parametro}">AQUI!</title>
 
 </head>
+
+<header th:fragment="navbar"
+        class="navbar navbar-expand navbar-dark"
+        style="min-height: 4rem; background-color: #11AC86;">
+
+    <div class="container flex-row bd-navbar">
+        <a class="navbar-brand" href="/">CPSB-API</a>
+
+        <div class="navbar-nav-scroll">
+            <ul class="navbar-nav bd-navbar flex-row">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/lista_pets">Lista de Pets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/lista_racas">Lista de Raças</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="ms-auto">
+            <form class="form-inline" th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-light" type="submit">Sair</button>
+            </form>
+        </div>
+    </div>
+</header>
