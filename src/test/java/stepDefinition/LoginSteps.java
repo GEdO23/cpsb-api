@@ -50,4 +50,15 @@ public class LoginSteps extends BasePage {
     public void vejoAMensagemDeErro() {
         isVisible(login.tvLoginError);
     }
+
+    @Entao("vejo a mensagem de Logout")
+    public void vejoAMensagemDeLogout() {
+        isVisible(login.tvLogoutSuccess);
+    }
+
+    @Quando("clico no botao Sign Off")
+    public void clicoNoBotaoSignOff() {
+        isVisible(home.btnSair);
+        click(home.btnSair);
+    }
 }
