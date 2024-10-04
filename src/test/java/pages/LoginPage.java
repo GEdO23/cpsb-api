@@ -11,6 +11,8 @@ public class LoginPage extends BasePage {
     public final By etUserPassword = By.id("password");
     public final By btnSignIn = By.id("btn-signin");
 
+    public final By tvLoginError = By.id("alert-invalid-user");
+
     public void fillUserName() {
         fillInput(etUserName, validUserName);
     }

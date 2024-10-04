@@ -33,4 +33,21 @@ public class LoginSteps extends BasePage {
     public void vejoATelaHome() {
         home.isOnHomePage();
     }
+
+    @Quando("entro com username invalido")
+    public void entroComUsernameInvalido() {
+        fillInput(login.etUserName, "invalid user");
+        login.fillUserPassword();
+    }
+
+    @Quando("entro com password invalido")
+    public void entroComPasswordInvalido() {
+        login.fillUserName();
+        fillInput(login.etUserPassword, "invalid password");
+    }
+
+    @Entao("vejo a mensagem de erro")
+    public void vejoAMensagemDeErro() {
+        isVisible(login.tvLoginError);
+    }
 }
