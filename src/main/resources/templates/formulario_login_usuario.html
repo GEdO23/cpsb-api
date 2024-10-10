@@ -1,6 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragmentos :: cabecalho('Login')}"></head>
+<head th:replace="~{fragmentos :: cabecalho(#{login_page_title})}"></head>
 <body>
 
 <div class="container mt-5">
@@ -8,28 +8,35 @@
         <h1 id="login-title">Cutcute Petshop</h1>
     </div>
 
-    <div id="alert-logout-success" class="alert alert-success" role="alert" th:if="${param.logout}">
-        Logout efetuado com sucesso
-    </div>
+    <div id="alert-logout-success"
+         class="alert alert-success"
+         role="alert"
+         th:if="${param.logout}"
+         th:text="#{logout_message_success}"></div>
 
     <div class="row">
         <form th:action="@{/login}" method="post">
 
             <div class="form-group mb-3">
-                <label for="username">Nome</label>
+                <label for="username" th:text="#{login_user_name_label}"></label>
                 <input class="form-control" type="text" id="username" name="username">
             </div>
 
             <div class="form-group mb-3">
-                <label for="password">Senha</label>
+                <label for="password" th:text="#{login_user_password_label}">Senha</label>
                 <input class="form-control" type="password" id="password" name="password">
             </div>
 
-            <div id="alert-invalid-user" class="alert alert-danger" role="alert" th:if="${param.erro_login}">
-                Usuário ou senha inválido
-            </div>
+            <div id="alert-invalid-user"
+                 class="alert alert-danger"
+                 role="alert"
+                 th:if="${param.erro_login}"
+                 th:text="#{login_message_error}"></div>
 
-            <button id="btn-signin" class="btn btn-primary" type="submit">Entrar</button>
+            <button id="btn-signin"
+                    class="btn btn-primary"
+                    type="submit"
+                    th:text="#{btn_login}"></button>
 
         </form>
     </div>
