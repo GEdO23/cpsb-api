@@ -18,7 +18,10 @@
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Detalhes de <span th:text="${raca.nome}"></span></h1>
+        <h1>
+            <span th:text="#{details_of} "></span>
+            <span th:text="${raca.nome}"></span>
+        </h1>
     </div>
 
     <div class="row">
@@ -26,14 +29,14 @@
 
             <tr>
 
-                <td class="col-2">Nome</td>
+                <td class="col-2" th:text="#{race_name_label}">Nome</td>
                 <td><span th:text="${raca.nome}"></span></td>
 
             </tr>
 
             <tr>
 
-                <td class="col-2">Descrição</td>
+                <td class="col-2" th:text="#{race_description_label}"></td>
                 <td><span th:text="${raca.descricao}"></span></td>
 
             </tr>
@@ -43,7 +46,7 @@
 
     <div class="row gap-2">
         <div class="col-auto">
-            <a href="/lista_racas">Voltar para a lista de raças</a>
+            <a href="/lista_racas" th:text="#{go_back_race_list}"></a>
         </div>
     </div>
 </div>

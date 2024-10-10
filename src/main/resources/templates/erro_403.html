@@ -10,7 +10,7 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
 
-    <title th:text="#{erro_403_page_title}"></title>
+    <title th:text="#{access_denied}"></title>
 </head>
 <body>
 
@@ -18,11 +18,13 @@
 
 <div class="jumbotron jumbotron-fluid mt-5">
     <div class="container">
-        <h1 class="display-6">Erro 403!</h1>
-        <p>Parece que você não tem permissão para acessar este conteúdo.</p>
+        <h1 class="display-6" th:text="#{error_403_title}">Erro 403!</h1>
+        <p th:text="#{error_403_message}">Parece que você não tem permissão para acessar este conteúdo.</p>
         <hr class="my-4">
         <p>
-            <a class="btn btn-primary" href="/pagina_principal">Voltar para página principal</a>
+            <a class="btn btn-primary"
+               href="/pagina_principal"
+               th:text="#{go_back_home}">Voltar para página principal</a>
         </p>
     </div>
 </div>

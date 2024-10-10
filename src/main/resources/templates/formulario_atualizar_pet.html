@@ -18,30 +18,31 @@
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Editar Pet</h1>
+        <h1 th:text="#{pet_update_page_title}"></h1>
     </div>
 
     <div class="row">
         <form th:action="@{/atualizar_pet/{idPet}(idPet = ${pet.id})}" method="post" th:object="${pet}">
 
             <div class="form-group">
-                <label for="nome">Nome</label>
+                <label for="nome" th:text="#{pet_name_label}">Nome</label>
                 <input class="form-control" type="text" id="nome" th:field="*{nome}">
             </div>
 
             <div class="form-group">
-                <label for="raca">Raça</label>
+                <label for="raca" th:text="#{pet_race_label}">Raça</label>
                 <select class="form-select" id="raca" th:field="*{raca.nome}">
                     <option th:each="r : ${lista_racas}"
                             th:value="${r}"
                             th:text="${r}">
                 </select>
                 <small id="racaHelp" class="form-text text-muted">
-                    <a href="/formulario_cadastrar_raca">Cadastrar nova raça</a>
+                    <a href="/formulario_cadastrar_raca"
+                       th:text="#{race_register}">Cadastrar nova raça</a>
                 </small>
             </div>
 
-            <button class="btn btn-primary mt-4" type="submit">Submit</button>
+            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}">Submit</button>
 
         </form>
     </div>
