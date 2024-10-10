@@ -1,18 +1,19 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head th:replace="~{fragmentos :: cabecalho('Home')}"></head>
 <body>
 
-<div th:replace="~{fragmentos :: navbar}"></div>
+<div th:replace="~{fragmentos :: navbar(#{endpoint_home})}"></div>
 
 <div class="jumbotron jumbotron-fluid mt-5">
     <div class="container">
         <h1 id="home-title" class="display-6">CPSB-API</h1>
-        <p class="lead">Seja muito bem vindo ao Cutcute Petshop Spring Boot API!</p>
+        <p class="lead" th:text="#{welcome_message}"></p>
         <hr class="my-4">
-        <p>Caso necessite de ajuda, entrar em contato com 
-            <a href="mailto:gabriel.eringer.23@gmail.com">Gabriel Eringer de Oliveira</a>!
-        </p>
+        <span>
+            <span th:text="#{help_contact_message}"></span>
+            <a href="mailto:gabriel.eringer.23@gmail.com" th:text="#{help_contact_name}"></a>
+        </span>
     </div>
 </div>
 
