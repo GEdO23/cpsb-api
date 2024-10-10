@@ -21,7 +21,7 @@ public class SecurityConfig {
                         .hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/pagina_principal", true)
                         .failureUrl("/login?erro_login=true")
                         .permitAll())
                 .logout((logout) -> logout.logoutUrl("/logout")
