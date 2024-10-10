@@ -18,7 +18,10 @@
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Detalhes de <span th:text="${pet.nome}"></span></h1>
+        <h1>
+            <span th:text="#{details_of} "></span>
+            <span th:text="${pet.nome}"></span>
+        </h1>
     </div>
 
     <div class="row">
@@ -26,21 +29,21 @@
 
             <tr>
 
-                <td class="col-2">Nome</td>
+                <td class="col-2" th:text="#{pet_name_label}"></td>
                 <td><span th:text="${pet.nome}"></span></td>
 
             </tr>
 
             <tr>
 
-                <td class="col-2">Raça</td>
+                <td class="col-2" th:text="#{pet_race_label}"></td>
                 <td><span th:text="${pet.raca.nome}"></span></td>
 
             </tr>
 
             <tr>
 
-                <td class="col-2">Descrição da raça</td>
+                <td class="col-2" th:text="#{pet_race_description_label}"></td>
                 <td><span th:text="${pet.raca.descricao}"></span></td>
 
             </tr>
@@ -49,7 +52,7 @@
     </div>
 
     <div class="row">
-        <a href="/lista_pets">Voltar para a lista de pets</a>
+        <a href="/lista_pets" th:text="#{go_back_pet_list}"></a>
     </div>
 </div>
 

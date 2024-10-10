@@ -18,7 +18,7 @@
 
 <div class="container">
     <div class="row mt-5">
-        <h1>Lista de Pets</h1>
+        <h1 th:text="#{pet_list_page_title}"></h1>
     </div>
 
     <div class="row">
@@ -26,8 +26,8 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Raça</th>
+                    <th scope="col" th:text="#{pet_name_label}"></th>
+                    <th scope="col" th:text="#{pet_race_label}"></th>
                     <th scope="col">#</th>
                     <th scope="col">#</th>
                     <th scope="col">#</th>
@@ -35,16 +35,19 @@
                 </thead>
                 <tbody>
                 <tr th:each="pet : ${pets}">
-                    <td class="col-3" th:text="${pet.nome}">Nome</td>
-                    <td class="col-3" th:text="${pet.raca.nome}">Raça</td>
+                    <td class="col-3" th:text="${pet.nome}"></td>
+                    <td class="col-3" th:text="${pet.raca.nome}"></td>
                     <td class="col-1">
-                        <a th:href="@{/detalhes_pet/{idPet}(idPet = ${pet.id})}">Detalhes</a>
+                        <a th:href="@{/detalhes_pet/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{details}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/formulario_atualizar_pet/{idPet}(idPet = ${pet.id})}">Atualizar</a>
+                        <a th:href="@{/formulario_atualizar_pet/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{update}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/remover_pet/{idPet}(idPet = ${pet.id})}">Remover</a>
+                        <a th:href="@{/remover_pet/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{remove}"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -53,7 +56,7 @@
     </div>
 
     <div class="row">
-        <a href="/formulario_cadastrar_pet">Cadastrar pet</a>
+        <a href="/formulario_cadastrar_pet" th:text="#{pet_register}"></a>
     </div>
 
 </div>

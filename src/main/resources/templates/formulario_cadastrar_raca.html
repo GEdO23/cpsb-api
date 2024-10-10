@@ -18,14 +18,14 @@
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Cadastro de Raça</h1>
+        <h1 th:text="#{race_register_page_title}">Cadastro de Raça</h1>
     </div>
 
     <div class="row">
         <form action="/cadastrar_raca" method="post" th:object="${raca}">
 
             <div class="form-group">
-                <label for="nome">Nome</label>
+                <label for="nome" th:text="#{race_name_label}">Nome</label>
                 <input class="form-control"
                        type="text"
                        id="nome"
@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label for="descricao">Descrição</label>
+                <label for="descricao" th:text="#{race_description_label}">Descrição</label>
                 <input class="form-control"
                        type="text"
                        id="descricao"
@@ -44,7 +44,7 @@
 
             <input type="hidden" name="_csrf" th:value="${_csrf.token}">
 
-            <button class="btn btn-primary mt-4" type="submit">Submit</button>
+            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}">Submit</button>
 
         </form>
     </div>

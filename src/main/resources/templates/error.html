@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,11 +18,12 @@
 
 <div class="container mt-5">
     <div class="row">
-        <h1>Erro encontrado</h1>
+        <h1 th:text="#{error_generic_title}">Erro encontrado</h1>
     </div>
     
     <div class="row">
-        <a href="/pagina_principal">Voltar para a home</a>
+        <a href="/pagina_principal"
+           th:text="#{go_back_home}">Voltar para a home</a>
     </div>
 </div>
 
