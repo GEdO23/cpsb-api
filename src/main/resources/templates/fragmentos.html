@@ -10,7 +10,7 @@
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous">
 
-    <title th:text="${titulo}">AQUI!</title>
+    <title th:text="${titulo}"></title>
 
 </head>
 
@@ -24,10 +24,10 @@
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav bd-navbar flex-row">
                 <li class="nav-item">
-                    <a class="nav-link" href="/lista_pets">Lista de Pets</a>
+                    <a class="nav-link" href="/lista_pets" th:text="#{nav_pet_list}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/lista_racas">Lista de Raças</a>
+                    <a class="nav-link" href="/lista_racas" th:text="#{nav_race_list}">Lista de Raças</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{__${pagina}__ (lang='pt')}">PT</a>
@@ -40,7 +40,11 @@
 
         <div class="ms-auto">
             <form class="form-inline" th:action="@{/logout}" method="post">
-                <button id="btn-sair" class="btn btn-outline-light" type="submit">Sair</button>
+                <button id="btn-sair"
+                        class="btn btn-outline-light"
+                        type="submit"
+                        th:text="#{btn_logout}"
+                ></button>
             </form>
         </div>
     </div>
