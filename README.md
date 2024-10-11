@@ -1,5 +1,9 @@
 # Cutcute Petshop Spring Boot API
 
+[Read in portuguese](README-pt.md) 
+
+[Read in english](README.md)
+
 [//]: #TODO (Add a description to the project)
 [//]: #TODO (Add the Cutcute Petshop logo)
 
