@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PetService {
+public class PetService implements ServiceDto<Long, Pet> {
 
     @Autowired
     private BreedService breedService;
@@ -18,42 +18,43 @@ public class PetService {
     @Autowired
     private PetRepository repo;
 
-    public Pet getUpdatedPet(Long id, Pet updatedPet) {
-        Pet foundPet = findPet(id);
-        foundPet.setName(updatedPet.getName());
-
-        Breed breed = breedService.findBreed(updatedPet.getBreed());
-        foundPet.setBreed(breed);
-
-        return foundPet;
-    }
-
-    public Pet findPet(Long id) {
-        Optional<Pet> petOptional = repo.findById(id);
-
-        if (petOptional.isEmpty()) {
-            throw new RuntimeException("Pet not found");
-        }
-
-        return petOptional.get();
-    }
-
-    public List<Pet> findAll() {
+    @Override
+    public List<Pet> get() {
         return repo.findAll();
     }
 
-    public void save(Pet pet) {
-        Breed breedFound = breedService.findBreed(pet.getBreed());
-        pet.setBreed(breedFound);
-        repo.save(pet);
-    }
-
-    public Optional<Pet> findById(Long id) {
+    @Override
+    public Optional<Pet> getById(Long id) {
         return repo.findById(id);
     }
 
-    public void deleteById(Long id) {
-        Pet petFound = findPet(id);
-        repo.deleteById(petFound.getId());
+    @Override
+    public void post(Pet pet) {
+        Breed foundBreed = breedService.getByName(pet.getBreed().getName());
+        pet.setBreed(foundBreed);
+        repo.save(pet);
+    }
+
+    @Override
+    public void put(Long id, Pet pet) {
+        Optional<Pet> foundPet = repo.findById(id);
+
+        if (foundPet.isPresent()) {
+            pet.setId(id);
+
+            Breed foundBreed = breedService.getByName(pet.getBreed().getName());
+            pet.getBreed().setId(foundBreed.id);
+
+            repo.save(pet);
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Pet> foundPet = repo.findById(id);
+
+        if (foundPet.isPresent()) {
+            repo.deleteById(id);
+        }
     }
 }
