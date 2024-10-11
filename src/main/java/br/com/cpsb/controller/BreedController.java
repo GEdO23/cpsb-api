@@ -85,4 +85,10 @@ public class BreedController {
         mv.addObject("breed", breed);
         return mv;
     }
+
+    @GetMapping("/breed_remove/{id}")
+    public String breedRemove(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/breed_list";
+    }
 }
