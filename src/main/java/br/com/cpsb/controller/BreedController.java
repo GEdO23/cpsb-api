@@ -36,10 +36,39 @@ public class BreedController {
         return mv;
     }
 
+    @PostMapping("/breed/update/{id}")
+    public ModelAndView update(@PathVariable Long id, Breed breed, BindingResult bd) {
+        if (bd.hasErrors()) {
+            ModelAndView mv = new ModelAndView("breed_form_update");
+            mv.addObject("breed", breed);
+            return mv;
+        }
+
+        service.put(id, breed);
+
+        return new ModelAndView("redirect:/breed_list");
+    }
+
     @GetMapping("/breed_form_register")
     public ModelAndView breedFormRegister() {
         ModelAndView mv = new ModelAndView("breed_form_register");
         mv.addObject("breed", new Breed());
+        return mv;
+    }
+
+    @GetMapping("/breed_form_update/{id}")
+    public ModelAndView breedFormUpdate(@PathVariable Long id) {
+        Optional<Breed> foundBreed = service.getById(id);
+
+        if (foundBreed.isEmpty()) {
+            return new ModelAndView("redirect:/breed_list");
+        }
+
+        Breed breed = foundBreed.get();
+
+        ModelAndView mv = new ModelAndView("breed_form_update");
+        mv.addObject("breed", breed);
+
         return mv;
     }
 
