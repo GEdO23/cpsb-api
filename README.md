@@ -1,43 +1,43 @@
 # Cutcute Petshop Spring Boot API
 
-[//]: #TODO (Adcionar uma descrição ao projeto)
-[//]: #TODO (Adcionar a logo do Cutcute Petshop)
+[//]: #TODO (Add a description to the project)
+[//]: #TODO (Add the Cutcute Petshop logo)
 
-## Pré-requisitos
-Para executar o projeto é necessário ter instalado:
+## Prerequisites
+To run the project, you need to have installed:
 - [Docker](https://www.docker.com/)
 
-## Como executar o projeto com Docker
-Siga as instruções abaixo para executar o container:
+## How to run the project with Docker
+Follow the instructions below to run the container:
 
-### 1. Clonar o repositório
+### 1. Clone the repository
 ```bash
 git clone https://github.com/GEdO23/cpsb-api.git
 cd cpsb-api
 ```
 
-### 2. Construir a imagem
+### 2. Build the image
 ```bash
 docker build -t cpsb-api .
 ```
-Este comando irá:
-- Construir a imagem a partir do Dockerfile (`-t cpsb-api`)
-- Utilizar o contexto do diretório atual (onde está o Dockerfile)
-- Nomear a imagem como `cpsb-api`
+This command will:
+- Build the image from the Dockerfile (`-t cpsb-api`)
+- Use the context of the current directory (where the Dockerfile is located)
+- Name the image as `cpsb-api`
 
-### 3. Executar o container
+### 3. Run the container
 ```bash
 docker run -d --name cpsb-api -p 8080:8080 cpsb-api
 ```
-Este comando irá:
-- Executar o container em background (`-d`)
-- Nomear o container como `cpsb-api` (`--name cpsb-api`)
-- Mapear a porta 8080 do host para a porta 8080 do container (`-p 8080:8080`)
+This command will:
+- Run the container in the background (`-d`)
+- Name the container as `cpsb-api` (`--name cpsb-api`)
+- Map port 8080 of the host to port 8080 of the container (`-p 8080:8080`)
 
-### 4. Acessar a API
-Acesse a API em [http://localhost:8080](http://localhost:8080)
+### 4. Access the API
+Access the API at [http://localhost:8080](http://localhost:8080)
 
-## Tecnologias utilizadas
+## Technologies used
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Docker](https://www.docker.com/)
 - [H2](https://www.h2database.com/html/main.html)
