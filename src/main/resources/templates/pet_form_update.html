@@ -10,45 +10,42 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
 
-    <title th:text="#{race_register_page_title}"></title>
+    <title th:text="#{pet_update_page_title}"></title>
 </head>
 <body>
 
-<div th:replace="~{fragmentos :: navbar(#{endpoint_race_register})}"></div>
+<div th:replace="~{fragments :: navbar(${pet.id})}"></div>
 
 <div class="container mt-5">
     <div class="row">
-        <h1 th:text="#{race_register_page_title}">Cadastro de Raça</h1>
+        <h1 th:text="#{pet_update_page_title}"></h1>
     </div>
 
     <div class="row">
-        <form action="/cadastrar_raca" method="post" th:object="${raca}">
+        <form th:action="@{/pet/update/{idPet}(idPet = ${pet.id})}" method="post" th:object="${pet}">
 
             <div class="form-group">
-                <label for="nome" th:text="#{race_name_label}">Nome</label>
-                <input class="form-control"
-                       type="text"
-                       id="nome"
-                       name="nome"
-                       th:field="*{nome}">
+                <label for="name" th:text="#{pet_name_label}"></label>
+                <input class="form-control" type="text" id="name" th:field="*{name}">
             </div>
 
             <div class="form-group">
-                <label for="descricao" th:text="#{race_description_label}">Descrição</label>
-                <input class="form-control"
-                       type="text"
-                       id="descricao"
-                       name="descricao"
-                       th:field="*{descricao}">
+                <label for="breed" th:text="#{pet_breed_label}"></label>
+                <select class="form-select" id="breed" th:field="*{breed.name}">
+                    <option th:each="breed : ${breed_list}"
+                            th:value="${breed}"
+                            th:text="${breed}">
+                </select>
+                <small id="breedHelp" class="form-text text-muted">
+                    <a href="/breed_form_register"
+                       th:text="#{breed_register}"></a>
+                </small>
             </div>
 
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-
-            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}">Submit</button>
+            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}"></button>
 
         </form>
     </div>
-
 </div>
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

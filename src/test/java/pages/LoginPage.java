@@ -9,7 +9,7 @@ public class LoginPage extends BasePage {
 
     public final By etUserName = By.id("username");
     public final By etUserPassword = By.id("password");
-    public final By btnSignIn = By.id("btn-signin");
+    public final By btnLogin = By.id("btn-login");
 
     public final By tvLoginError = By.id("alert-invalid-user");
     public final By tvLogoutSuccess = By.id("alert-logout-success");
@@ -23,12 +23,12 @@ public class LoginPage extends BasePage {
     }
 
     public void clickBtnSignIn() {
-        click(btnSignIn);
+        click(btnLogin);
     }
 
     public void isOnLoginPage() {
         driver.get("http://localhost:8080/login");
-        isVisible(btnSignIn);
+        isVisible(btnLogin);
     }
 
 }

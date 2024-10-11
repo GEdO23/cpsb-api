@@ -20,18 +20,17 @@ public class Pet {
     private Long id;
     
     @Column(name = "nm_pet")
-    private String nome;
+    private String name;
 
     @ManyToOne()
-    @JoinColumn(name = "id_raca")
-    private Raca raca;
+    @JoinColumn(name = "id_breed")
+    private Breed breed;
 
-    //TODO: Adicionar o restante dos atributos:
-    // - especie (Especie CLASS)
-    // - peso (Double) opcional
-    // - observacoes (ArrayList<String>) opcional
-    // - foto (String) opcional
-    // - genero (Genero ENUM)
-    // - endereco (Endereco CLASS) ou
-    // - petshop (Petshop CLASS)
+    //TODO: Add the rest of pet atributes
+    // - specie (Specie CLASS)
+    // - weight (Double) optional
+    // - observations (ArrayList<String>) optional
+    // - photo (String) optional
+    // - sex (Sex ENUM)
+    // - petShop (PetShop CLASS) with address (Address CLASS)
 }

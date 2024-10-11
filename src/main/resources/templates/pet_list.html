@@ -10,15 +10,15 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
 
-    <title th:text="#{race_list_page_title}"></title>
+    <title th:text="#{pet_list_page_title}"></title>
 </head>
 <body>
 
-<div th:replace="~{fragmentos :: navbar(#{endpoint_race_list})}"></div>
+<div th:replace="~{fragments :: navbar(#{endpoint_pet_list})}"></div>
 
 <div class="container">
     <div class="row mt-5">
-        <h1 th:text="#{race_list_page_title}">Lista de Raças</h1>
+        <h1 th:text="#{pet_list_page_title}"></h1>
     </div>
 
     <div class="row">
@@ -26,16 +26,28 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th scope="col" th:text="#{race_name_label}">Nome</th>
+                    <th scope="col" th:text="#{pet_name_label}"></th>
+                    <th scope="col" th:text="#{pet_breed_label}"></th>
+                    <th scope="col">#</th>
+                    <th scope="col">#</th>
                     <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="raca : ${racas}">
-                    <td class="col-3" th:text="${raca.nome}">Nome</td>
+                <tr th:each="pet : ${pets}">
+                    <td class="col-3" th:text="${pet.name}"></td>
+                    <td class="col-3" th:text="${pet.breed.name}"></td>
                     <td class="col-1">
-                        <a th:href="@{/detalhes_raca/{idRaca}(idRaca = ${raca.id})}"
-                           th:text="#{details}">Detalhes</a>
+                        <a th:href="@{/pet_details/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{details}"></a>
+                    </td>
+                    <td class="col-1">
+                        <a th:href="@{/pet_form_update/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{update}"></a>
+                    </td>
+                    <td class="col-1">
+                        <a th:href="@{/pet_remove/{idPet}(idPet = ${pet.id})}"
+                           th:text="#{remove}"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -44,7 +56,7 @@
     </div>
 
     <div class="row">
-        <a href="/formulario_cadastrar_raca" th:text="#{race_register}">Cadastrar raça</a>
+        <a href="/pet_form_register" th:text="#{pet_register}"></a>
     </div>
 
 </div>

@@ -14,16 +14,16 @@
 </head>
 <body>
 
-<div th:replace="~{fragmentos :: navbar(#{endpoint_home})}"></div>
+<div th:replace="~{fragments :: navbar(#{endpoint_home})}"></div>
 
 <div class="container mt-5">
     <div class="row">
-        <h1 th:text="#{error_generic_title}">Erro encontrado</h1>
+        <h1 th:text="#{error_generic_title}"></h1>
     </div>
     
     <div class="row">
-        <a href="/pagina_principal"
-           th:text="#{go_back_home}">Voltar para a home</a>
+        <a href="/home"
+           th:text="#{go_back_home}"></a>
     </div>
 </div>
 

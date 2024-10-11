@@ -14,15 +14,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((requests) -> requests.requestMatchers(
-                                "/formulario_cadastrar_pet",
-                                "/formulario_atualizar_pet/{id}",
-                                "/remover_pet/{id}",
-                                "/formulario_cadastrar_raca")
+                                "/pet_form_register",
+                                "/pet_form_update/{id}",
+                                "/pet_remove/{id}",
+                                "/breed_form_register")
                         .hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login")
-                        .defaultSuccessUrl("/pagina_principal", true)
-                        .failureUrl("/login?erro_login=true")
+                        .defaultSuccessUrl("/home", true)
+                        .failureUrl("/login?login_error=true")
                         .permitAll())
                 .logout((logout) -> logout.logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .exceptionHandling((exception) ->
                         exception.accessDeniedHandler(
                                 (request, response, accessDeniedException) -> 
-                                        response.sendRedirect("/acesso_negado")
+                                        response.sendRedirect("/access_denied")
                         ));
 
         return http.build();
