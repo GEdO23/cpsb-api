@@ -25,7 +25,7 @@ public class PetController {
 
     @GetMapping("/lista_pets")
     public ModelAndView listaPets() {
-        ModelAndView mv = new ModelAndView("lista_pets");
+        ModelAndView mv = new ModelAndView("pet_lista");
         List<Pet> pets = service.findAll();
         mv.addObject("pets", pets);
         return mv;
@@ -41,7 +41,7 @@ public class PetController {
 
     @GetMapping("/formulario_cadastrar_pet")
     public ModelAndView formularioCadastrarPet() {
-        ModelAndView mv = new ModelAndView("form_cadastrar_pet");
+        ModelAndView mv = new ModelAndView("pet_form_cadastrar");
         mv.addObject("pet", new Pet());
         List<String> foundRacas = racaService.findAllNomes();
         mv.addObject("lista_racas", foundRacas);
@@ -51,7 +51,7 @@ public class PetController {
     @PostMapping("/atualizar_pet/{id}")
     public ModelAndView atualizarPet(@PathVariable Long id, Pet pet, BindingResult bd) {
         if (bd.hasErrors()) {
-            ModelAndView mv = new ModelAndView("form_atualizar_pet");
+            ModelAndView mv = new ModelAndView("pet_form_atualizar");
             mv.addObject("pet", pet);
             List<String> foundRacas = racaService.findAllNomes();
             mv.addObject("lista_racas", foundRacas);
@@ -74,7 +74,7 @@ public class PetController {
 
         Pet pet = petOptional.get();
 
-        ModelAndView mv = new ModelAndView("form_atualizar_pet");
+        ModelAndView mv = new ModelAndView("pet_form_atualizar");
         mv.addObject("pet", pet);
         List<String> foundRacas = racaService.findAllNomes();
         mv.addObject("lista_racas", foundRacas);
@@ -91,7 +91,7 @@ public class PetController {
         }
 
         Pet pet = petOptional.get();
-        ModelAndView mv = new ModelAndView("detalhes_pet");
+        ModelAndView mv = new ModelAndView("pet_detalhes");
         mv.addObject("pet", pet);
 
         return mv;
