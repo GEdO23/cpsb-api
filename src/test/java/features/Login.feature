@@ -1,34 +1,34 @@
-# language: pt
+# language: en
 
 @Login
-Funcionalidade: Login
+Feature: Login
 
   @LoginValido @SmokeTest
-  Cenário: Login com credenciais validas
-    Dado que estou na tela de login
-    Quando entro com credenciais validas
-    E clico no botao de submit
-    Entao vejo a tela Home
+  Scenario: Login com credenciais validas
+    Given i am in login screen
+    When enter with valid credentials
+    And click submit button
+    Then view home screen
 
   @LoginInvalido
-  Cenário: Login com username invalido
-    Dado que estou na tela de login
-    Quando entro com username invalido
-    E clico no botao de submit
-    Entao vejo a mensagem de erro
+  Scenario: Login com username invalido
+    Given i am in login screen
+    When enter with invalid username
+    And click submit button
+    Then view login error message
 
   @LoginInvalido
-  Cenário: Login com password invalido
-    Dado que estou na tela de login
-    Quando entro com password invalido
-    E clico no botao de submit
-    Entao vejo a mensagem de erro
+  Scenario: Login com password invalido
+    Given i am in login screen
+    When enter with invalid password
+    And click submit button
+    Then view login error message
 
   @SignOff
-  Cenário: Realizar o Sign Off
-    Dado que estou na tela de login
-    Quando entro com credenciais validas
-    E clico no botao de submit
-    Entao vejo a tela Home
-    Quando clico no botao Sign Off
-    Entao vejo a mensagem de Logout
+  Scenario: Realizar o Sign Off
+    Given i am in login screen
+    When enter with valid credentials
+    And click submit button
+    Then view home screen
+    When click sign off button
+    Then view logout success message
