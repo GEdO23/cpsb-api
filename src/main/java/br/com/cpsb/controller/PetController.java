@@ -26,7 +26,7 @@ public class PetController {
     @GetMapping("/pet_list")
     public ModelAndView petList() {
         ModelAndView mv = new ModelAndView("pet_list");
-        List<Pet> pets = service.findAll();
+        List<Pet> pets = service.get();
         mv.addObject("pets", pets);
         return mv;
     }
@@ -34,7 +34,7 @@ public class PetController {
     @PostMapping("/pet/save")
     public ModelAndView save(Pet pet) {
         ModelAndView mv = new ModelAndView("redirect:/pet_list");
-        service.save(pet);
+        service.post(pet);
         mv.addObject("pet", pet);
         return mv;
     }
@@ -43,7 +43,7 @@ public class PetController {
     public ModelAndView petFormRegister() {
         ModelAndView mv = new ModelAndView("pet_form_register");
         mv.addObject("pet", new Pet());
-        List<String> foundBreeds = breedService.findAllNames();
+        List<String> foundBreeds = breedService.getBreedsNames();
         mv.addObject("breed_list", foundBreeds);
         return mv;
     }
@@ -53,20 +53,19 @@ public class PetController {
         if (bd.hasErrors()) {
             ModelAndView mv = new ModelAndView("pet_form_update");
             mv.addObject("pet", pet);
-            List<String> foundRacas = breedService.findAllNames();
+            List<String> foundRacas = breedService.getBreedsNames();
             mv.addObject("breed_list", foundRacas);
             return mv;
         }
 
-        Pet updatedPet = service.getUpdatedPet(id, pet);
-        service.save(updatedPet);
+        service.put(id, pet);
 
         return new ModelAndView("redirect:/pet_list");
     }
 
     @GetMapping("/pet_form_update/{id}")
     public ModelAndView petFormUpdate(@PathVariable Long id) {
-        Optional<Pet> petOptional = service.findById(id);
+        Optional<Pet> petOptional = service.getById(id);
 
         if (petOptional.isEmpty()) {
             return new ModelAndView("redirect:/pet_list");
@@ -76,7 +75,7 @@ public class PetController {
 
         ModelAndView mv = new ModelAndView("pet_form_update");
         mv.addObject("pet", pet);
-        List<String> foundBreeds = breedService.findAllNames();
+        List<String> foundBreeds = breedService.getBreedsNames();
         mv.addObject("breed_list", foundBreeds);
 
         return mv;
@@ -84,7 +83,7 @@ public class PetController {
 
     @GetMapping("/pet_details/{id}")
     public ModelAndView petDetails(@PathVariable Long id) {
-        Optional<Pet> petOptional = service.findById(id);
+        Optional<Pet> petOptional = service.getById(id);
 
         if (petOptional.isEmpty()) {
             return new ModelAndView("redirect:/pet_list");
@@ -99,7 +98,7 @@ public class PetController {
 
     @GetMapping("/pet_remove/{id}")
     public String petRemove(@PathVariable Long id) {
-        service.deleteById(id);
+        service.delete(id);
         return "redirect:/pet_list";
     }
 }

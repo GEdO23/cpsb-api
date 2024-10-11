@@ -9,34 +9,59 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BreedService {
+public class BreedService implements ServiceDto<Long, Breed>{
 
     @Autowired
     private BreedRepository repo;
 
-    public Breed findBreed(Breed breed) {
-        Optional<Breed> breedOptional = repo.findByName(breed.getName());
+    public List<String> getBreedsNames() {
+        return repo.findAll()
+                .stream()
+                .map(Breed::getName)
+                .toList();
+    }
 
-        if (breedOptional.isEmpty()) {
-            throw new RuntimeException("Breed not found");
+    public Breed getByName(String name) {
+        Optional<Breed> foundBreed = repo.findByName(name);
+
+        if (foundBreed.isEmpty()) {
+            throw new RuntimeException("BREED NOT FOUND");
         }
 
-        return breedOptional.get();
+        return foundBreed.get();
     }
 
-    public List<String> findAllNames() {
-        return repo.findAll().stream().map(Breed::getName).toList();
-    }
-
-    public List<Breed> findAll() {
+    @Override
+    public List<Breed> get() {
         return repo.findAll();
     }
 
-    public void save(Breed breed) {
+    @Override
+    public Optional<Breed> getById(Long id) {
+        return repo.findById(id);
+    }
+
+    @Override
+    public void post(Breed breed) {
         repo.save(breed);
     }
 
-    public Optional<Breed> findById(Long id) {
-        return repo.findById(id);
+    @Override
+    public void put(Long id, Breed breed) {
+        Optional<Breed> foundBreed = repo.findById(id);
+
+        if (foundBreed.isPresent()) {
+            breed.setId(id);
+            repo.save(breed);
+        }
+    }
+
+    @Override
+    public void delete(Long id) {
+        Optional<Breed> foundBreed = repo.findById(id);
+
+        if (foundBreed.isPresent()) {
+            repo.deleteById(id);
+        }
     }
 }
