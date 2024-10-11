@@ -19,43 +19,64 @@ import java.util.Optional;
 public class PetController {
 
     @Autowired
-    private PetRepository petRepository;
+    private PetRepository repoPet;
 
     @Autowired
-    private RacaRepository racaRepository;
+    private RacaRepository repoRaca;
 
-    //Lista de pets
+    private void preencherFormulario(Pet pet, ModelAndView mv) {
+        mv.addObject("pet", pet);
+        List<String> racas = repoRaca.findAllNomes();
+        mv.addObject("lista_racas", racas);
+    }
+
+    private Pet updatedPet(Long id, Pet p) {
+        Pet pet = findPet(id);
+        pet.setNome(p.getNome());
+
+        Raca raca = findRaca(p.getRaca());
+        pet.setRaca(raca);
+
+        return pet;
+    }
+
+    private Pet findPet(Long id) {
+        Optional<Pet> petOptional = repoPet.findById(id);
+
+        if (petOptional.isEmpty()) {
+            throw new RuntimeException("Pet não encontrado");
+        }
+
+        return petOptional.get();
+    }
+
+    private Raca findRaca(Raca raca) {
+        Optional<Raca> racaOptional = repoRaca.findByNome(raca.getNome());
+
+        if (racaOptional.isEmpty()) {
+            throw new RuntimeException("Raça não encontrada");
+        }
+
+        return racaOptional.get();
+    }
+
     @GetMapping("/lista_pets")
     public ModelAndView listaPets() {
         ModelAndView mv = new ModelAndView("lista_pets");
-
-        List<Pet> pets = petRepository.findAll();
+        List<Pet> pets = repoPet.findAll();
         mv.addObject("pets", pets);
-
         return mv;
     }
 
-    //Cadastro de pet
     @PostMapping("/cadastrar_pet")
-    public ModelAndView cadastrarPet(Pet newPet) {
+    public ModelAndView cadastrarPet(Pet pet) {
         ModelAndView mv = new ModelAndView("redirect:/lista_pets");
-        
-        Optional<Raca> racaOptional = racaRepository.findAll().stream().filter(raca ->
-                raca.getNome().equals(newPet.getRaca().getNome())
-        ).findFirst();
-        
-        if (racaOptional.isPresent()) {
-            newPet.setRaca(racaOptional.get());
-        } else {
-            Raca raca = new Raca();
-            raca.setNome(newPet.getRaca().getNome());
-            raca.setDescricao("Descrição da raça " + newPet.getRaca().getNome());
-            racaRepository.save(raca);
-            newPet.setRaca(raca);
-        }
 
-        petRepository.save(newPet);
-        mv.addObject("pet", newPet);
+        Raca racaEncontrada = findRaca(pet.getRaca());
+        pet.setRaca(racaEncontrada);
+
+        repoPet.save(pet);
+        mv.addObject("pet", pet);
 
         return mv;
     }
@@ -63,99 +84,62 @@ public class PetController {
     @GetMapping("/formulario_cadastrar_pet")
     public ModelAndView formularioCadastrarPet() {
         ModelAndView mv = new ModelAndView("formulario_cadastrar_pet");
-        mv.addObject("pet", new Pet());
-
-        List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
-        mv.addObject("lista_racas", racas);
-
+        preencherFormulario(new Pet(), mv);
         return mv;
     }
 
-    //Edição de pet
     @PostMapping("/atualizar_pet/{id}")
-    public ModelAndView atualizarPet(@PathVariable Long id, Pet newPet, BindingResult bd) {
+    public ModelAndView atualizarPet(@PathVariable Long id, Pet pet, BindingResult bd) {
         if (bd.hasErrors()) {
             ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
-            mv.addObject("pet", newPet);
-
-            List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
-            mv.addObject("lista_racas", racas);
-
+            preencherFormulario(pet, mv);
             return mv;
         }
 
-        Optional<Pet> petOptional = petRepository.findById(id);
-
-        if (petOptional.isPresent()) {
-            Pet pet = petOptional.get();
-            pet.setNome(newPet.getNome());
-
-            Optional<Raca> racaOptional = racaRepository.findAll().stream().filter(raca ->
-                    raca.getNome().equals(newPet.getRaca().getNome())
-            ).findFirst();
-
-            if (racaOptional.isPresent()) {
-                pet.setRaca(racaOptional.get());
-            } else {
-                Raca raca = new Raca();
-                raca.setNome(newPet.getRaca().getNome());
-                raca.setDescricao("Descrição da raça " + newPet.getRaca().getNome());
-                racaRepository.save(raca);
-                pet.setRaca(raca);
-            }
-
-            petRepository.save(pet);
-        }
+        repoPet.save(updatedPet(id, pet));
 
         return new ModelAndView("redirect:/lista_pets");
     }
 
     @GetMapping("/formulario_atualizar_pet/{id}")
     public ModelAndView formularioAtualizarPet(@PathVariable Long id) {
-        Optional<Pet> petOptional = petRepository.findById(id);
+        Optional<Pet> petOptional = repoPet.findById(id);
 
-        if (petOptional.isPresent()) {
-            Pet pet = petOptional.get();
-            ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
-            mv.addObject("pet", pet);
-
-            List<String> racas = racaRepository.findAll().stream().map(Raca::getNome).toList();
-            mv.addObject("lista_racas", racas);
-
-            return mv;
-        } else {
+        if (petOptional.isEmpty()) {
             return new ModelAndView("redirect:/lista_pets");
         }
+
+        Pet pet = petOptional.get();
+        ModelAndView mv = new ModelAndView("formulario_atualizar_pet");
+        preencherFormulario(pet, mv);
+
+        return mv;
     }
 
-    //Detalhes de pet
     @GetMapping("/detalhes_pet/{id}")
     public ModelAndView detalhesPet(@PathVariable Long id) {
-        Optional<Pet> petOptional = petRepository.findById(id);
+        Optional<Pet> petOptional = repoPet.findById(id);
 
-        if (petOptional.isPresent()) {
-            Pet pet = petOptional.get();
-
-            ModelAndView mv = new ModelAndView("detalhes_pet");
-            mv.addObject("pet", pet);
-
-            return mv;
-        } else {
+        if (petOptional.isEmpty()) {
             return new ModelAndView("redirect:/lista_pets");
         }
+
+        Pet pet = petOptional.get();
+
+        ModelAndView mv = new ModelAndView("detalhes_pet");
+        mv.addObject("pet", pet);
+
+        return mv;
     }
 
-
-    //Remover pet
     @GetMapping("/remover_pet/{id}")
     public String removerPet(@PathVariable Long id) {
-        Optional<Pet> petOptional = petRepository.findById(id);
+        Optional<Pet> petOptional = repoPet.findById(id);
 
         if (petOptional.isPresent()) {
-            petRepository.deleteById(id);
+            repoPet.deleteById(id);
         }
-        
+
         return "redirect:/lista_pets";
     }
-
 }

@@ -16,51 +16,44 @@ import java.util.Optional;
 public class RacaController {
 
     @Autowired
-    private RacaRepository racaRepository;
+    private RacaRepository repoRaca;
 
     @GetMapping("/lista_racas")
     public ModelAndView listaRacas() {
         ModelAndView mv = new ModelAndView("lista_racas");
-
-        List<Raca> racas = racaRepository.findAll();
+        List<Raca> racas = repoRaca.findAll();
         mv.addObject("racas", racas);
-
         return mv;
     }
 
     @PostMapping("/cadastrar_raca")
-    public ModelAndView cadastrarRaca(Raca new_raca) {
+    public ModelAndView cadastrarRaca(Raca raca) {
         ModelAndView mv = new ModelAndView("redirect:/lista_racas");
-
-        racaRepository.save(new_raca);
-
-        mv.addObject("raca", new_raca);
-
+        repoRaca.save(raca);
+        mv.addObject("raca", raca);
         return mv;
     }
 
     @GetMapping("/formulario_cadastrar_raca")
     public ModelAndView formularioCadastrarRaca() {
         ModelAndView mv = new ModelAndView("formulario_cadastrar_raca");
-
         mv.addObject("raca", new Raca());
-
         return mv;
     }
 
     @GetMapping("/detalhes_raca/{id}")
     public ModelAndView detalhesRaca(@PathVariable Long id) {
-        Optional<Raca> racaOptional = racaRepository.findById(id);
+        Optional<Raca> racaOptional = repoRaca.findById(id);
 
-        if (racaOptional.isPresent()) {
-            Raca raca = racaOptional.get();
-
-            ModelAndView mv = new ModelAndView("detalhes_raca");
-            mv.addObject("raca", raca);
-
-            return mv;
-        } else {
+        if (racaOptional.isEmpty()) {
             return new ModelAndView("redirect:/lista_racas");
         }
+
+        Raca raca = racaOptional.get();
+
+        ModelAndView mv = new ModelAndView("detalhes_raca");
+        mv.addObject("raca", raca);
+
+        return mv;
     }
 }
