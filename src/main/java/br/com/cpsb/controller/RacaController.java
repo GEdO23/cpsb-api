@@ -1,7 +1,6 @@
 package br.com.cpsb.controller;
 
 import br.com.cpsb.model.Raca;
-import br.com.cpsb.repository.RacaRepository;
 import br.com.cpsb.service.RacaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class RacaController {
 
     @GetMapping("/lista_racas")
     public ModelAndView listaRacas() {
-        ModelAndView mv = new ModelAndView("lista_racas");
+        ModelAndView mv = new ModelAndView("raca_lista");
         List<Raca> racas = service.findAll();
         mv.addObject("racas", racas);
         return mv;
@@ -37,7 +36,7 @@ public class RacaController {
 
     @GetMapping("/formulario_cadastrar_raca")
     public ModelAndView formularioCadastrarRaca() {
-        ModelAndView mv = new ModelAndView("form_cadastrar_raca");
+        ModelAndView mv = new ModelAndView("raca_form_cadastrar");
         mv.addObject("raca", new Raca());
         return mv;
     }
@@ -51,7 +50,7 @@ public class RacaController {
         }
 
         Raca raca = racaOptional.get();
-        ModelAndView mv = new ModelAndView("detalhes_raca");
+        ModelAndView mv = new ModelAndView("raca_detalhes");
         mv.addObject("raca", raca);
         return mv;
     }
