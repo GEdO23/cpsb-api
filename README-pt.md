@@ -1,5 +1,9 @@
 # Cutcute Petshop Spring Boot API
 
+[Ler em inglês](README.md)
+
+[Ler em português](README-pt.md)
+
 ## Pré-requisitos
 Para executar o projeto é necessário ter instalado:
 - [Docker](https://www.docker.com/)
