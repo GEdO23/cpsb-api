@@ -1,9 +1,9 @@
 package stepDefinition;
 
-import io.cucumber.java.pt.Dado;
-import io.cucumber.java.pt.E;
-import io.cucumber.java.pt.Entao;
-import io.cucumber.java.pt.Quando;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
@@ -13,52 +13,52 @@ public class LoginSteps extends BasePage {
     LoginPage login = new LoginPage();
     HomePage home = new HomePage();
 
-    @Dado("que estou na tela de login")
-    public void queEstouNaTelaDeLogin() {
+    @Given("i am in login screen")
+    public void iAmInLoginScreen() {
         login.isOnLoginPage();
     }
 
-    @Quando("entro com credenciais validas")
-    public void entroComCredenciaisValidas() {
+    @When("enter with valid credentials")
+    public void enterWithValidCredentials() {
         login.fillUserName();
         login.fillUserPassword();
     }
 
-    @E("clico no botao de submit")
-    public void clicoNoBotaoDeSubmit() {
+    @And("click submit button")
+    public void clickSubmitButton() {
         login.clickBtnSignIn();
     }
 
-    @Entao("vejo a tela Home")
-    public void vejoATelaHome() {
+    @Then("view home screen")
+    public void viewHomeScreen() {
         home.isOnHomePage();
     }
 
-    @Quando("entro com username invalido")
-    public void entroComUsernameInvalido() {
+    @When("enter with invalid username")
+    public void enterWithInvalidUsername() {
         fillInput(login.etUserName, "invalid user");
         login.fillUserPassword();
     }
 
-    @Quando("entro com password invalido")
-    public void entroComPasswordInvalido() {
+    @When("enter with invalid password")
+    public void enterWithInvalidPassword() {
         login.fillUserName();
         fillInput(login.etUserPassword, "invalid password");
     }
 
-    @Entao("vejo a mensagem de erro")
-    public void vejoAMensagemDeErro() {
+    @Then("view login error message")
+    public void viewLoginErrorMessage() {
         isVisible(login.tvLoginError);
     }
 
-    @Entao("vejo a mensagem de Logout")
-    public void vejoAMensagemDeLogout() {
+    @Then("view logout success message")
+    public void viewLogoutSuccessMessage() {
         isVisible(login.tvLogoutSuccess);
     }
 
-    @Quando("clico no botao Sign Off")
-    public void clicoNoBotaoSignOff() {
-        isVisible(home.btnSair);
-        click(home.btnSair);
+    @When("click sign off button")
+    public void clickSignOffButton() {
+        isVisible(home.btnExit);
+        click(home.btnExit);
     }
 }
