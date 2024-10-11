@@ -8,6 +8,6 @@ public class UsuarioController {
 
     @GetMapping("/login")
     public String login() {
-        return "formulario_login_usuario";
+        return "login";
     }
 }
