@@ -29,6 +29,7 @@
                     <th scope="col" th:text="#{breed_name_label}"></th>
                     <th scope="col">#</th>
                     <th scope="col">#</th>
+                    <th scope="col">#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,10 @@
                     <td class="col-1">
                         <a th:href="@{/breed_form_update/{idBreed}(idBreed = ${breed.id})}"
                            th:text="#{update}"></a>
+                    </td>
+                    <td class="col-1">
+                        <a th:href="@{/breed_remove/{idBreed}(idBreed = ${breed.id})}"
+                           th:text="#{remove}"></a>
                     </td>
                 </tr>
                 </tbody>
