@@ -14,12 +14,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "TB_CPSB_USUARIO")
-public class Usuario {
+@Table(name = "TB_CPSB_USER")
+public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "id_user")
     private Long id;
     
     @Column(name = "nm_username")
@@ -29,8 +29,8 @@ public class Usuario {
     private String password;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "TB_CPSB_USUARIO_ROLE",
-            joinColumns = @JoinColumn(name = "id_usuario"),
+    @JoinTable(name = "TB_CPSB_USER_ROLE",
+            joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
     private Set<Role> roles = new HashSet<>();
     

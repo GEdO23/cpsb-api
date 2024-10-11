@@ -1,23 +1,23 @@
-<header th:fragment="navbar(pagina)"
+<header th:fragment="navbar(page)"
         class="navbar navbar-expand navbar-dark"
         style="min-height: 4rem; background-color: #11AC86;">
 
     <div class="container flex-row bd-navbar">
-        <a class="navbar-brand" href="/pagina_principal">CPSB-API</a>
+        <a class="navbar-brand" href="/home">CPSB-API</a>
 
         <div class="navbar-nav-scroll">
             <ul class="navbar-nav bd-navbar flex-row">
                 <li class="nav-item">
-                    <a class="nav-link" href="/lista_pets" th:text="#{nav_pet_list}"></a>
+                    <a class="nav-link" href="/pet_list" th:text="#{nav_pet_list}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/lista_racas" th:text="#{nav_race_list}">Lista de Raças</a>
+                    <a class="nav-link" href="/breed_list" th:text="#{nav_breed_list}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{__${pagina}__ (lang='pt')}">PT</a>
+                    <a class="nav-link" th:href="@{__${page}__ (lang='pt')}">PT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{__${pagina}__ (lang='en')}">EN</a>
+                    <a class="nav-link" th:href="@{__${page}__ (lang='en')}">EN</a>
                 </li>
             </ul>
         </div>

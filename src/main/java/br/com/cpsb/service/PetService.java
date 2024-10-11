@@ -1,9 +1,8 @@
 package br.com.cpsb.service;
 
+import br.com.cpsb.model.Breed;
 import br.com.cpsb.model.Pet;
-import br.com.cpsb.model.Raca;
 import br.com.cpsb.repository.PetRepository;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +13,17 @@ import java.util.Optional;
 public class PetService {
 
     @Autowired
-    private RacaService racaService;
+    private BreedService breedService;
 
     @Autowired
     private PetRepository repo;
 
     public Pet getUpdatedPet(Long id, Pet updatedPet) {
         Pet foundPet = findPet(id);
-        foundPet.setNome(updatedPet.getNome());
+        foundPet.setName(updatedPet.getName());
 
-        Raca raca = racaService.findRaca(updatedPet.getRaca());
-        foundPet.setRaca(raca);
+        Breed breed = breedService.findBreed(updatedPet.getBreed());
+        foundPet.setBreed(breed);
 
         return foundPet;
     }
@@ -33,7 +32,7 @@ public class PetService {
         Optional<Pet> petOptional = repo.findById(id);
 
         if (petOptional.isEmpty()) {
-            throw new RuntimeException("Pet não encontrado");
+            throw new RuntimeException("Pet not found");
         }
 
         return petOptional.get();
@@ -44,8 +43,8 @@ public class PetService {
     }
 
     public void save(Pet pet) {
-        Raca racaEncontrada = racaService.findRaca(pet.getRaca());
-        pet.setRaca(racaEncontrada);
+        Breed breedFound = breedService.findBreed(pet.getBreed());
+        pet.setBreed(breedFound);
         repo.save(pet);
     }
 
@@ -54,7 +53,7 @@ public class PetService {
     }
 
     public void deleteById(Long id) {
-        Pet foundPet = findPet(id);
-        repo.deleteById(foundPet.getId());
+        Pet petFound = findPet(id);
+        repo.deleteById(petFound.getId());
     }
 }
