@@ -8,11 +8,11 @@ public class CpsbApiController {
     
     @GetMapping("/pagina_principal")
     public String index() {
-        return "index";
+        return "pagina_principal";
     }
     
     @GetMapping("/acesso_negado")
     public String acessoNegado() {
-        return "erro_403";
+        return "error_403";
     }
 }

@@ -8,8 +8,4 @@ import java.util.Optional;
 
 public interface RacaRepository extends JpaRepository<Raca, Long> {
     Optional<Raca> findByNome(String raca);
-
-    default List<String> findAllNomes() {
-        return findAll().stream().map(Raca::getNome).toList();
-    }
 }
