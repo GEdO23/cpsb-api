@@ -27,7 +27,6 @@ public class Pet {
     private Raca raca;
 
     //TODO: Adicionar o restante dos atributos:
-    // - raca (Raca CLASS)
     // - especie (Especie CLASS)
     // - peso (Double) opcional
     // - observacoes (ArrayList<String>) opcional
