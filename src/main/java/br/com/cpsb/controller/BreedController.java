@@ -1,7 +1,6 @@
 package br.com.cpsb.controller;
 
 import br.com.cpsb.model.Breed;
-import br.com.cpsb.model.Pet;
 import br.com.cpsb.service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ public class BreedController {
 
     @GetMapping("/breed_list")
     public ModelAndView breedList() {
-        ModelAndView mv = new ModelAndView("breed_list");
+        ModelAndView mv = new ModelAndView("breed/breed_list");
         List<Breed> breeds = service.get();
         mv.addObject("breeds", breeds);
         return mv;
@@ -39,7 +38,7 @@ public class BreedController {
     @PostMapping("/breed/update/{id}")
     public ModelAndView update(@PathVariable Long id, Breed breed, BindingResult bd) {
         if (bd.hasErrors()) {
-            ModelAndView mv = new ModelAndView("breed_form_update");
+            ModelAndView mv = new ModelAndView("breed/form_update");
             mv.addObject("breed", breed);
             return mv;
         }
@@ -51,7 +50,7 @@ public class BreedController {
 
     @GetMapping("/breed_form_register")
     public ModelAndView breedFormRegister() {
-        ModelAndView mv = new ModelAndView("breed_form_register");
+        ModelAndView mv = new ModelAndView("breed/form_create");
         mv.addObject("breed", new Breed());
         return mv;
     }
@@ -66,7 +65,7 @@ public class BreedController {
 
         Breed breed = foundBreed.get();
 
-        ModelAndView mv = new ModelAndView("breed_form_update");
+        ModelAndView mv = new ModelAndView("breed/form_update");
         mv.addObject("breed", breed);
 
         return mv;
@@ -81,7 +80,7 @@ public class BreedController {
         }
 
         Breed breed = breedOptional.get();
-        ModelAndView mv = new ModelAndView("breed_details");
+        ModelAndView mv = new ModelAndView("breed/details");
         mv.addObject("breed", breed);
         return mv;
     }

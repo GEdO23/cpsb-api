@@ -25,7 +25,7 @@ public class PetController {
 
     @GetMapping("/pet_list")
     public ModelAndView petList() {
-        ModelAndView mv = new ModelAndView("pet_list");
+        ModelAndView mv = new ModelAndView("pet/pet_list");
         List<Pet> pets = service.get();
         mv.addObject("pets", pets);
         return mv;
@@ -41,7 +41,7 @@ public class PetController {
 
     @GetMapping("/pet_form_register")
     public ModelAndView petFormRegister() {
-        ModelAndView mv = new ModelAndView("pet_form_register");
+        ModelAndView mv = new ModelAndView("pet/form_create");
         mv.addObject("pet", new Pet());
         List<String> foundBreeds = breedService.getBreedsNames();
         mv.addObject("breed_list", foundBreeds);
@@ -51,7 +51,7 @@ public class PetController {
     @PostMapping("/pet/update/{id}")
     public ModelAndView update(@PathVariable Long id, Pet pet, BindingResult bd) {
         if (bd.hasErrors()) {
-            ModelAndView mv = new ModelAndView("pet_form_update");
+            ModelAndView mv = new ModelAndView("pet/form_update");
             mv.addObject("pet", pet);
             List<String> foundRacas = breedService.getBreedsNames();
             mv.addObject("breed_list", foundRacas);
@@ -73,7 +73,7 @@ public class PetController {
 
         Pet pet = petOptional.get();
 
-        ModelAndView mv = new ModelAndView("pet_form_update");
+        ModelAndView mv = new ModelAndView("pet/form_update");
         mv.addObject("pet", pet);
         List<String> foundBreeds = breedService.getBreedsNames();
         mv.addObject("breed_list", foundBreeds);
@@ -90,7 +90,7 @@ public class PetController {
         }
 
         Pet pet = petOptional.get();
-        ModelAndView mv = new ModelAndView("pet_details");
+        ModelAndView mv = new ModelAndView("pet/details");
         mv.addObject("pet", pet);
 
         return mv;
