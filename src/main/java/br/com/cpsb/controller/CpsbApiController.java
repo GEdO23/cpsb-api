@@ -13,6 +13,6 @@ public class CpsbApiController {
     
     @GetMapping("/denied_access")
     public String deniedAccess() {
-        return "error_403";
+        return "errors/e403";
     }
 }

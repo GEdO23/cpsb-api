@@ -10,19 +10,19 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
 
-    <title th:text="#{breed_register_page_title}"></title>
+    <title th:text="#{breed_update_page_title}"></title>
 </head>
 <body>
 
-<div th:replace="~{fragments :: navbar(#{endpoint_breed_register})}"></div>
+<div th:replace="~{fragments/navbar :: navbar(#{endpoint_breed_update})}"></div>
 
 <div class="container mt-5">
     <div class="row">
-        <h1 th:text="#{breed_register_page_title}"></h1>
+        <h1 th:text="#{breed_update_page_title}"></h1>
     </div>
 
     <div class="row">
-        <form action="/breed/save" method="post" th:object="${breed}">
+        <form th:action="@{/breed/update/{breedId}(breedId = ${breed.id})}" method="post" th:object="${breed}">
 
             <div class="form-group">
                 <label for="name" th:text="#{breed_name_label}"></label>
@@ -41,8 +41,6 @@
                        name="description"
                        th:field="*{description}">
             </div>
-
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
 
             <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}"></button>
 
