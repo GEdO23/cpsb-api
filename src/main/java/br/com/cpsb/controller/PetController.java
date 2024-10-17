@@ -6,10 +6,7 @@ import br.com.cpsb.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -26,54 +23,46 @@ public class PetController {
     private BreedService breedService;
 
     @GetMapping()
-    public ModelAndView petList() {
+    public ModelAndView petListPage() {
         ModelAndView mv = new ModelAndView("pet/pet_list");
-        List<Pet> pets = service.get();
+        List<Pet> pets = service.getAll();
         mv.addObject("pets", pets);
         return mv;
     }
 
-    @PostMapping("/save")
-    public ModelAndView save(Pet pet) {
-        ModelAndView mv = new ModelAndView("redirect:/pets");
-        service.post(pet);
+    @GetMapping("/{id}")
+    public ModelAndView petDetailsPage(@PathVariable Long id) {
+        Optional<Pet> foundPet = service.getById(id);
+
+        if (foundPet.isEmpty()) {
+            return new ModelAndView("redirect:/pets");
+        }
+
+        Pet pet = foundPet.get();
+        ModelAndView mv = new ModelAndView("pet/details");
         mv.addObject("pet", pet);
+
         return mv;
     }
 
     @GetMapping("/form-register")
-    public ModelAndView petFormRegister() {
+    public ModelAndView petFormRegisterPage() {
         ModelAndView mv = new ModelAndView("pet/form_create");
         mv.addObject("pet", new Pet());
-        List<String> foundBreeds = breedService.getBreedsNames();
-        mv.addObject("breed_list", foundBreeds);
+        List<String> breedsNames = breedService.getBreedsNames();
+        mv.addObject("breed_list", breedsNames);
         return mv;
     }
 
-    @PostMapping("/update/{id}")
-    public ModelAndView update(@PathVariable Long id, Pet pet, BindingResult bd) {
-        if (bd.hasErrors()) {
-            ModelAndView mv = new ModelAndView("pet/form_update");
-            mv.addObject("pet", pet);
-            List<String> foundRacas = breedService.getBreedsNames();
-            mv.addObject("breed_list", foundRacas);
-            return mv;
-        }
-
-        service.put(id, pet);
-
-        return new ModelAndView("redirect:/pets");
-    }
-
     @GetMapping("/form-update/{id}")
-    public ModelAndView petFormUpdate(@PathVariable Long id) {
-        Optional<Pet> petOptional = service.getById(id);
+    public ModelAndView petFormUpdatePage(@PathVariable Long id) {
+        Optional<Pet> foundPet = service.getById(id);
 
-        if (petOptional.isEmpty()) {
+        if (foundPet.isEmpty()) {
             return new ModelAndView("redirect:/pets");
         }
 
-        Pet pet = petOptional.get();
+        Pet pet = foundPet.get();
 
         ModelAndView mv = new ModelAndView("pet/form_update");
         mv.addObject("pet", pet);
@@ -83,23 +72,31 @@ public class PetController {
         return mv;
     }
 
-    @GetMapping("/{id}")
-    public ModelAndView petDetails(@PathVariable Long id) {
-        Optional<Pet> petOptional = service.getById(id);
-
-        if (petOptional.isEmpty()) {
-            return new ModelAndView("redirect:/pets");
-        }
-
-        Pet pet = petOptional.get();
-        ModelAndView mv = new ModelAndView("pet/details");
+    @PostMapping("/save")
+    public ModelAndView savePet(Pet pet) {
+        ModelAndView mv = new ModelAndView("redirect:/pets");
+        service.post(pet);
         mv.addObject("pet", pet);
-
         return mv;
     }
 
+    @PostMapping("/update/{id}")
+    public ModelAndView updatePet(@PathVariable Long id, Pet pet, BindingResult bd) {
+        if (bd.hasErrors()) {
+            ModelAndView mv = new ModelAndView("pet/form_update");
+            mv.addObject("pet", pet);
+            List<String> foundBreeds = breedService.getBreedsNames();
+            mv.addObject("breed_list", foundBreeds);
+            return mv;
+        }
+
+        service.put(id, pet);
+
+        return new ModelAndView("redirect:/pets");
+    }
+    
     @GetMapping("/remove/{id}")
-    public String petRemove(@PathVariable Long id) {
+    public String removePet(@PathVariable Long id) {
         service.delete(id);
         return "redirect:/pets";
     }
