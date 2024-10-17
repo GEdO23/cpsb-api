@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CpsbApiController {
     
     @GetMapping("/home")
-    public String index() {
+    public String homePage() {
         return "home";
     }
     
     @GetMapping("/denied_access")
-    public String deniedAccess() {
+    public String deniedAccessPage() {
         return "errors/e403";
     }
 }

@@ -19,7 +19,7 @@ public class PetService implements ServiceDto<Long, Pet> {
     private PetRepository repo;
 
     @Override
-    public List<Pet> get() {
+    public List<Pet> getAll() {
         return repo.findAll();
     }
 
