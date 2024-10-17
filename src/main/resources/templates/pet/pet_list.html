@@ -38,15 +38,15 @@
                     <td class="col-3" th:text="${pet.name}"></td>
                     <td class="col-3" th:text="${pet.breed.name}"></td>
                     <td class="col-1">
-                        <a th:href="@{/pet_details/{idPet}(idPet = ${pet.id})}"
+                        <a th:href="@{/pets/{idPet}(idPet = ${pet.id})}"
                            th:text="#{details}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/pet_form_update/{idPet}(idPet = ${pet.id})}"
+                        <a th:href="@{/pets/form-update/{idPet}(idPet = ${pet.id})}"
                            th:text="#{update}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/pet_remove/{idPet}(idPet = ${pet.id})}"
+                        <a th:href="@{/pets/remove/{idPet}(idPet = ${pet.id})}"
                            th:text="#{remove}"></a>
                     </td>
                 </tr>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="row">
-        <a href="/pet_form_register" th:text="#{pet_register}"></a>
+        <a href="/pets/form-register" th:text="#{pet_register}"></a>
     </div>
 
 </div>

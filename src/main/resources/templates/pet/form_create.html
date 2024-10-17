@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        <form action="/pet/save" method="post" th:object="${pet}">
+        <form action="/pets/save" method="post" th:object="${pet}">
 
             <div class="form-group">
                 <label for="name" th:text="#{pet_name_label}"></label>
@@ -37,14 +37,14 @@
                             th:text="${breed}">
                 </select>
                 <small id="breedHelp" class="form-text text-muted">
-                    <a href="/breed_form_register"
+                    <a href="/breeds/form-register"
                        th:text="#{breed_register}"></a>
                 </small>
             </div>
 
             <input type="hidden" name="_csrf" th:value="${_csrf.token}">
 
-            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}"></button>
+            <button class="btn btn-primary mt-4" type="submit" th:text="#{register}"></button>
 
         </form>
     </div>

@@ -5,21 +5,20 @@ import br.com.cpsb.service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/breeds")
 public class BreedController {
 
     @Autowired
     private BreedService service;
 
-    @GetMapping("/breed_list")
+    @GetMapping()
     public ModelAndView breedList() {
         ModelAndView mv = new ModelAndView("breed/breed_list");
         List<Breed> breeds = service.get();
@@ -27,15 +26,15 @@ public class BreedController {
         return mv;
     }
 
-    @PostMapping("/breed/save")
+    @PostMapping("/save")
     public ModelAndView save(Breed breed) {
-        ModelAndView mv = new ModelAndView("redirect:/breed_list");
+        ModelAndView mv = new ModelAndView("redirect:/breeds");
         service.post(breed);
         mv.addObject("breed", breed);
         return mv;
     }
 
-    @PostMapping("/breed/update/{id}")
+    @PostMapping("/update/{id}")
     public ModelAndView update(@PathVariable Long id, Breed breed, BindingResult bd) {
         if (bd.hasErrors()) {
             ModelAndView mv = new ModelAndView("breed/form_update");
@@ -45,22 +44,22 @@ public class BreedController {
 
         service.put(id, breed);
 
-        return new ModelAndView("redirect:/breed_list");
+        return new ModelAndView("redirect:/breeds");
     }
 
-    @GetMapping("/breed_form_register")
-    public ModelAndView breedFormRegister() {
+    @GetMapping("/form-register")
+    public ModelAndView formRegister() {
         ModelAndView mv = new ModelAndView("breed/form_create");
         mv.addObject("breed", new Breed());
         return mv;
     }
 
-    @GetMapping("/breed_form_update/{id}")
-    public ModelAndView breedFormUpdate(@PathVariable Long id) {
+    @GetMapping("/form-update/{id}")
+    public ModelAndView formUpdate(@PathVariable Long id) {
         Optional<Breed> foundBreed = service.getById(id);
 
         if (foundBreed.isEmpty()) {
-            return new ModelAndView("redirect:/breed_list");
+            return new ModelAndView("redirect:/breeds");
         }
 
         Breed breed = foundBreed.get();
@@ -71,12 +70,12 @@ public class BreedController {
         return mv;
     }
 
-    @GetMapping("/breed_details/{id}")
-    public ModelAndView breedDetails(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ModelAndView details(@PathVariable Long id) {
         Optional<Breed> breedOptional = service.getById(id);
 
         if (breedOptional.isEmpty()) {
-            return new ModelAndView("redirect:/breed_list");
+            return new ModelAndView("redirect:/breeds");
         }
 
         Breed breed = breedOptional.get();
@@ -85,9 +84,9 @@ public class BreedController {
         return mv;
     }
 
-    @GetMapping("/breed_remove/{id}")
-    public String breedRemove(@PathVariable Long id) {
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/breed_list";
+        return "redirect:/breeds";
     }
 }
