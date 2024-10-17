@@ -14,10 +14,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((requests) -> requests.requestMatchers(
-                                "/pet_form_register",
-                                "/pet_form_update/{id}",
-                                "/pet_remove/{id}",
-                                "/breed_form_register")
+                                "/pets/form-register",
+                                "/pets/form-update/{id}",
+                                "/pets/remove/{id}",
+                                "/breeds/form-register",
+                                "/breeds/form-update/{id}",
+                                "/breeds/remove/{id}")
                         .hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login")

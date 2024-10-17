@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        <form th:action="@{/breed/update/{breedId}(breedId = ${breed.id})}" method="post" th:object="${breed}">
+        <form th:action="@{/breeds/update/{breedId}(breedId = ${breed.id})}" method="post" th:object="${breed}">
 
             <div class="form-group">
                 <label for="name" th:text="#{breed_name_label}"></label>
@@ -42,7 +42,7 @@
                        th:field="*{description}">
             </div>
 
-            <button class="btn btn-primary mt-4" type="submit" th:text="#{btn_send}"></button>
+            <button class="btn btn-primary mt-4" type="submit" th:text="#{update}"></button>
 
         </form>
     </div>

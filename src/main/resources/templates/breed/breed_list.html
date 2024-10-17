@@ -36,15 +36,15 @@
                 <tr th:each="breed : ${breeds}">
                     <td class="col-3" th:text="${breed.name}"></td>
                     <td class="col-1">
-                        <a th:href="@{/breed_details/{idBreed}(idBreed = ${breed.id})}"
+                        <a th:href="@{/breeds/{idBreed}(idBreed = ${breed.id})}"
                            th:text="#{details}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/breed_form_update/{idBreed}(idBreed = ${breed.id})}"
+                        <a th:href="@{/breeds/form-update/{idBreed}(idBreed = ${breed.id})}"
                            th:text="#{update}"></a>
                     </td>
                     <td class="col-1">
-                        <a th:href="@{/breed_remove/{idBreed}(idBreed = ${breed.id})}"
+                        <a th:href="@{/breeds/remove/{idBreed}(idBreed = ${breed.id})}"
                            th:text="#{remove}"></a>
                     </td>
                 </tr>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="row">
-        <a href="/breed_form_register" th:text="#{breed_register}"></a>
+        <a href="/breeds/form-register" th:text="#{breed_register}"></a>
     </div>
 
 </div>
